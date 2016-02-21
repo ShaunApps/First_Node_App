@@ -2,36 +2,36 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var redis = require("redis");
-var redisClient = redis.createClient();
+var redisClient = redis.createClient();    //initial setup for Redis
 
 
 var messages = [];
-var storeMessage = function(name, data) {
+var storeMessage = function(name, data) {     //creates function that stores messages in redis DB
   var message = JSON.stringify({name: name, data: data});
 
   redisClient.lpush("messages", message, function(err, response){
-    redisClient.ltrim("messages", 0, 9);
+    redisClient.ltrim("messages", 0, 9);    //only keeps most recent 10 messages. 
   });
 }
 
 app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/index.html');        //GET request from browser sends client to index.html page
 });
 
-io.on('connection', function(socket) {
+io.on('connection', function(socket) {    //listening for connection.
 
 
-  socket.on('chat message', function(msg) {
+  socket.on('chat message', function(msg) {  //listener for any chat message that is executed
 
     var nickname = socket.nickname;
 
     socket.broadcast.emit('chat message', nickname + ": " + msg);
     socket.emit('chat message', nickname + ": " + msg);
-    storeMessage(nickname, msg);
+    storeMessage(nickname, msg);               //stores the name:user into the database
   });
 
 
-  socket.on('join', function(name) {
+  socket.on('join', function(name) {       //listener for when someone joins the chat
     socket.nickname = name;
     socket.broadcast.emit('chat message', name + " has joined the chat");
 
