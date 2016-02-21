@@ -27,6 +27,7 @@
     $('form').submit(function(){
       var message = $('#m').val();
       socket.emit('chat message', message);
+      $('#m').val('');
       return false;
     });
       socket.on('chat message', function(msg){
@@ -37,7 +38,7 @@
         nickname = prompt("What is your name?");
 
         socket.emit('join', nickname);
-      })
+      });
 
 
     </script>
