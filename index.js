@@ -18,9 +18,10 @@ io.on('connection', function(socket) {
 
   socket.on('join', function(name) {
     socket.nickname = name;
+    socket.broadcast.emit('chat message', name + " has joined the chat");
   });
 
-  
+
 
 });
 
