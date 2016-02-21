@@ -9,6 +9,7 @@
   "author": "Shaun Appelbaum",
   "license": "MIT",
   "dependencies": {
+    "connect-redis": "^3.0.2",
     "express": "^4.13.4",
     "redis": "^2.4.2",
     "socket.io": "^1.4.5"

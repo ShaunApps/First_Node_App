@@ -36,11 +36,15 @@
       socket.on('connect', function(data) {
         $('#status').html('Connected to chat');
         nickname = prompt("What is your name?");
-
         socket.emit('join', nickname);
       });
 
-      
+      socket.on('add chatter', function(name){
+        var chatter = $('<li>'+name+'<li>').data('name', name);
+        $('#chatters').append(chatter);
+      });
+
+
 
 
     </script>
