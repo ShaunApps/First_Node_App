@@ -2,15 +2,16 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var redis = require('redis');
-var client = redis.createClient();
+var redisClient = redis.createClient();
 
 
-var messages = [];
+// var messages = []; was used to store messages locally
 var storeMessage = function(name, data) {
-  messages.push({name: name, data: data});
-  if (messages.length > 10) {
-    messages.shift();
-  }
+  var message = JSON.stringify(({name: name, data: data});
+
+  redisClient.lpush("messages", message, function(err, response){
+    redisClient.ltrim("messages", 0, 9);
+  });
 }
 
 app.get('/', function(req, res){
