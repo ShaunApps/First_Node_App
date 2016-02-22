@@ -10,7 +10,7 @@ var storeMessage = function(name, data) {     //creates function that stores mes
   var message = JSON.stringify({name: name, data: data});
 
   redisClient.lpush("messages", message, function(err, response){
-    redisClient.ltrim("messages", 0, 9);    //only keeps most recent 10 messages. 
+    redisClient.ltrim("messages", 0, 9);    //only keeps most recent 10 messages.
   });
 }
 
@@ -55,8 +55,12 @@ io.on('connection', function(socket) {    //listening for connection.
    });
   });
 
-  // socket.on('disconnect', function (){
-  //   socket.nickname = name;
+  // socket.on('disconnect', function (name){
+  //   socket.get('nickname', function(err, name){
+  //     socket.broadcast.emit('remove chatter', name);
+  //
+  //     redisClient.srem('chatters', name);
+  //   });
   //   socket.emit('chat message', name + " has left the chat");
   // });
 
