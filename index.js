@@ -12,7 +12,12 @@ var storeMessage = function(name, data) {     //creates function that stores mes
   redisClient.lpush("messages", message, function(err, response){
     redisClient.ltrim("messages", 0, 9);    //only keeps most recent 10 messages.
   });
-}
+};
+
+redisClient.on('error', function(err){      // should throw error on bad connection to Redis
+  throw err;
+});
+
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');        //GET request from browser sends client to index.html page
@@ -56,6 +61,7 @@ io.on('connection', function(socket) {    //listening for connection.
   });
 
   // socket.on('disconnect', function (name){
+  //   socket.nickname = name;
   //   socket.get('nickname', function(err, name){
   //     socket.broadcast.emit('remove chatter', name);
   //

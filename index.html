@@ -19,7 +19,9 @@
   <body>
 
     <div class="row">
-      <div class="col-md-3"></div>
+      <div class="col-md-3">
+        <ul id="chatters"></ul>
+      </div>
       <div class="col-md-6 container">
         <ul id="messages"></ul>
       </div>
@@ -58,8 +60,8 @@
       });
 
       socket.on('add chatter', function(name){
-        var chatter = $('<li>'+name+'<li>').data('name', name);
-        $('#chatters').append(chatter);
+        var chatter = $('<li>'+ name +'<li>').data('name', name);
+        $('#chatters').append(chatter);     //need to add html structure for this
       });
 
       // socket.on('remove chatter', function(name) {
