@@ -12,6 +12,7 @@
       #messages { list-style-type: none; margin: 0; padding: 0; }
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #eee; }
+      #chatters { list-style-type: none; }
     </style>
   </head>
 
@@ -19,13 +20,18 @@
   <body>
 
     <div class="row">
+
       <div class="col-md-3">
-        <ul id="chatters"></ul>
+        <div class="sidebar-module sidebar-module-inset">
+            <h4>People Online</h4>
+            <ul id="chatters"></ul>
       </div>
+    </div>
       <div class="col-md-6 container">
         <ul id="messages"></ul>
       </div>
       <div class="col-md-3"></div>
+
     </div>
 
     <div class="row">
@@ -61,7 +67,7 @@
 
       socket.on('add chatter', function(name){
         var chatter = $('<li>'+ name +'<li>').data('name', name);
-        $('#chatters').append(chatter);     //need to add html structure for this
+        $('#chatters').append(chatter);
       });
 
       // socket.on('remove chatter', function(name) {
