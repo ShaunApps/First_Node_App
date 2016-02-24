@@ -1,11 +1,12 @@
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-// var redis = require("redis");
-// var redisClient = redis.createClient();
-var redisClient = require('redis').createClient(process.env.REDIS_URL);
+var redis = require("redis");
+var redisClient = redis.createClient();
+// var redisClient = require('redis').createClient(process.env.REDIS_URL);
   // initial setup for Redis
-var port = process.env.PORT || 5000   // for heroku deployment
+
+// var port = process.env.PORT || 5000   // for heroku deployment
 
 // if (process.env.REDISTOGO_URL) {
 //   var rtg   = require("url").parse(process.env.REDISTOGO_URL);
@@ -94,10 +95,10 @@ io.on('connection', function(socket) {    //listening for connection.
 
 //
 //
-// http.listen(3000, function(){
-//   console.log('listening on *:3000');
-// });
-
-http.listen(port, function(){            //for heroku deployment
-  // console.log('listening on *:3000');
+http.listen(3000, function(){
+  console.log('listening on *:3000');
 });
+//
+// http.listen(port, function(){            //for heroku deployment
+//   // console.log('listening on *:3000');
+// });
