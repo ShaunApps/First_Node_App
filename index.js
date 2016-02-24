@@ -5,7 +5,7 @@ var redis = require("redis");
 var redisClient = redis.createClient();    //initial setup for Redis
 
 
-var messages = [];
+// var messages = [];
 var storeMessage = function(name, data) {     //creates function that stores messages in redis DB
   var message = JSON.stringify({name: name, data: data});
 
@@ -60,17 +60,24 @@ io.on('connection', function(socket) {    //listening for connection.
    });
   });
 
-  // socket.on('disconnect', function (name){
-  //   socket.nickname = name;
-  //   socket.get('nickname', function(err, name){
-  //     socket.broadcast.emit('remove chatter', name);
-  //
-  //     redisClient.srem('chatters', name);
-  //   });
-  //   socket.emit('chat message', name + " has left the chat");
-  // });
+  socket.on('disconnect', function (name){   //on disconnect, server should ping to client and see who responds
+    // console.log("DISCONNECT", name, socket.nickname);  //  <------this was used to debug, to see what is going on
+    name = socket.nickname;
+    // socket.get('nickname', function(err, name)
+
+    socket.broadcast.emit('remove chatter', name);
+      redisClient.srem('chatters', name);
+
+    socket.broadcast.emit('chat message', name + " has left the chat");
+
+
+  });
+
+
 
 });
+
+// io.on('disconnect', function)  prob not this
 
 http.listen(3000, function(){
   console.log('listening on *:3000');
