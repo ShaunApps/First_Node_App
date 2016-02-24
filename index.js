@@ -40,7 +40,7 @@ io.on('connection', function(socket) {    //listening for connection.
   socket.on('join', function(name) {       //listener for when someone joins the chat
 
     socket.nickname = name;
-    console.log("ADD", socket.nickname);
+    // console.log("ADD", socket.nickname);      <<<<< just for testing
     socket.broadcast.emit('chat message', name + " has joined the chat");
 
     socket.broadcast.emit('add chatter', name);
@@ -82,8 +82,8 @@ io.on('connection', function(socket) {    //listening for connection.
 
 // io.on('disconnect', function)  prob not this
 
-
-
+//
+//
 // http.listen(3000, function(){
 //   console.log('listening on *:3000');
 // });
