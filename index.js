@@ -3,7 +3,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var redis = require("redis");
 // var redisClient = redis.createClient();  // initial setup for Redis
-var port = process.env.PORT || 5000   // for heroku deployment
+// var port = process.env.PORT || 5000   // for heroku deployment
 if (process.env.REDISTOGO_URL) {
   var rtg   = require("url").parse(process.env.REDISTOGO_URL);
   var redisClient = require("redis").createClient(rtg.port, rtg.hostname);
