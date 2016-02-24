@@ -1,17 +1,20 @@
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var redis = require("redis");
-// var redisClient = redis.createClient();  // initial setup for Redis
-// var port = process.env.PORT || 5000   // for heroku deployment
-if (process.env.redistogo:f8dfb3b448a134ba9ee81a00074ed1bb@herring.redistogo.com:10269/) {
-  var rtg   = require("url").parse(process.env.redistogo:f8dfb3b448a134ba9ee81a00074ed1bb@herring.redistogo.com:10269/);
-  var redisClient = require("redis").createClient(rtg.port, rtg.hostname);
+// var redis = require("redis");
+// var redisClient = redis.createClient();
+var redisClient = require('redis').createClient(process.env.REDIS_URL);
+  // initial setup for Redis
+var port = process.env.PORT || 5000   // for heroku deployment
 
-redis.auth(rtg.auth.split(":")[1]);
-} else {
-    var redis = require("redis").createClient();
-};
+// if (process.env.REDISTOGO_URL) {
+//   var rtg   = require("url").parse(process.env.REDISTOGO_URL);
+//   var redisClient = require("redis").createClient(rtg.port, rtg.hostname);
+//
+//   redis.auth(rtg.auth.split(":")[1]);
+// } else {
+//     var redis = require("redis").createClient();
+// };
 
 // var messages = [];
 var storeMessage = function(name, data) {     //creates function that stores messages in redis DB
