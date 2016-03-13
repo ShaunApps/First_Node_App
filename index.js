@@ -37,7 +37,6 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket) {    //listening for connection.
 
-
   socket.on('chat message', function(msg) {  //listener for any chat message that is executed
 
     var nickname = socket.nickname;
@@ -74,18 +73,18 @@ io.on('connection', function(socket) {    //listening for connection.
    });
   });
 
-  socket.on('disconnect', function (name){   //on disconnect, server should ping to client and see who responds
-    // console.log("DISCONNECT", name, socket.nickname);  //  <------this was used to debug, to see what is going on
-    name = socket.nickname;
-    // socket.get('nickname', function(err, name)
-
-    socket.broadcast.emit('remove chatter', name);
-      redisClient.srem('chatters', name);
-
-    socket.broadcast.emit('chat message', name + " has left the chat");
-
-
-  });
+  // socket.on('disconnect', function (name){   //on disconnect, server should ping to client and see who responds
+  //   // console.log("DISCONNECT", name, socket.nickname);  //  <------this was used to debug, to see what is going on
+  //   name = socket.nickname;
+  //   // socket.get('nickname', function(err, name)
+  //
+  //   socket.broadcast.emit('remove chatter', name);
+  //     redisClient.srem('chatters', name);
+  //
+  //   socket.broadcast.emit('chat message', name + " has left the chat");
+  //
+  //
+  // });
 
 
 
