@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Shaun's Chat</title>
+    <title>Node Chat</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -13,6 +13,7 @@
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #eee; }
       #chatters { list-style-type: none; }
+      #prevmessages { background-color: ccf1f2;}
     </style>
   </head>
 
@@ -27,7 +28,7 @@
             <ul id="chatters"></ul>
       </div>
     </div>
-      <div class="col-md-6 container">
+      <div class="col-md-6 container" id="prevmessages">
         <ul id="messages"></ul>
       </div>
       <div class="col-md-3"></div>
